@@ -29,6 +29,8 @@ function show(req, res) {
         if (results.length === 0) {
             return res.status(404).json({ error: "Film non trovato" });
         }
+
+        results[0].image = req.imagePath + results[0].image;
         res.json(results[0]);
     });
 }
