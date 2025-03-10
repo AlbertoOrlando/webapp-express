@@ -22,6 +22,9 @@ function index(req, res) {
 function show(req, res) {
     const id = req.params.id;
     const sql = 'SELECT * FROM movies WHERE id = ?';
+
+    const reviewSql = "SELECT * FROM reviews WHERE movie_id = ?";
+
     connection.query(sql, [id], (err, results) => {
         if (err) {
             return res.status(500).json({ error: "Il database non risponde" });
@@ -31,7 +34,16 @@ function show(req, res) {
         }
 
         results[0].image = req.imagePath + results[0].image;
-        res.json(results[0]);
+
+        connection.query(reviewSql, [id], (err, reviews) => {
+            if (err) {
+                return res.status(500).json({ error: "Il database non risponde" });
+            }
+            results[0].reviews = reviews
+            res.json(results[0]);
+        }
+        )
+
     });
 }
 
