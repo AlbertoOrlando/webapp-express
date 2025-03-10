@@ -1,0 +1,25 @@
+{
+  "name": "webapp-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "watch": "node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertoOrlando/webapp-express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlbertoOrlando/webapp-express/issues"
+  },
+  "homepage": "https://github.com/AlbertoOrlando/webapp-express#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mysql2": "^3.13.0"
+  }
+}
