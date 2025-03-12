@@ -10,12 +10,16 @@ const moviesRouter = require('./routers/movies');
 
 const imagePath = require('./middlewares/imagePath');
 
+const cors = require('cors')
+
 
 app.use(express.static('public'));
 
 app.use(express.json());
 
 app.use(imagePath);
+
+app.use(cors({ origin: process.env.FE_APP }))
 
 app.get('/api', (req, res) => {
     res.send("Siamo nella home");
