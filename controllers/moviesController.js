@@ -68,6 +68,23 @@ function storeReviews(req, res) {
 
 }
 
+function deleteReviews(req, res) {
+    const { id } = req.params;
+
+
+    const deleteReviewSql = 'DELETE FROM reviews WHERE id = ?'
+
+    connection.query(deleteReviewSql, [id], (err) => {
+        if (err) {
+            // Se c'è un errore nella query, restituiamo un errore 500
+            return res.status(500).json({ error: "Failed to delete review" });
+        }
+        // Restituiamo stato 204 (No Content) per indicare successo
+        res.sendStatus(204);
+    });
+
+}
+
 function destroy(req, res) {
     const id = parseInt(req.params.id); // Otteniamo l'ID del post dalla richiesta
 
@@ -78,12 +95,14 @@ function destroy(req, res) {
     connection.query(deletePostSql, [id], (err) => {
         if (err) {
             // Se c'è un errore nella query, restituiamo un errore 500
-            return res.status(500).json({ error: "Failed to delete post" });
+            return res.status(500).json({ error: "Failed to delete movie" });
         }
         // Restituiamo stato 204 (No Content) per indicare successo
         res.sendStatus(204);
     });
 }
 
-module.exports = { index, show, store, storeReviews, destroy };
+module.exports = { index, show, store, storeReviews, destroy, deleteReviews };
+
+
 
