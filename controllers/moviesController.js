@@ -68,5 +68,22 @@ function storeReviews(req, res) {
 
 }
 
-module.exports = { index, show, store, storeReviews };
+function destroy(req, res) {
+    const id = parseInt(req.params.id); // Otteniamo l'ID del post dalla richiesta
+
+    // Query per eliminare il post specifico
+    const deleteSql = `DELETE FROM posts WHERE id = ?`;
+
+    // Eseguiamo la query per eliminare il post
+    connection.query(deletePostSql, [id], (err) => {
+        if (err) {
+            // Se c'è un errore nella query, restituiamo un errore 500
+            return res.status(500).json({ error: "Failed to delete post" });
+        }
+        // Restituiamo stato 204 (No Content) per indicare successo
+        res.sendStatus(204);
+    });
+}
+
+module.exports = { index, show, store, storeReviews, destroy };
 
