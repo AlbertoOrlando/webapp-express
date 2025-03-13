@@ -53,17 +53,17 @@ function store(res, req) {
 
 }
 
-function storeReviews(res, req) {
-    const { id } = req.paramas;
+function storeReviews(req, res) {
+    const { id } = req.params;
 
-    const { text, name, vote } = req.boby;
+    const { text, name, vote } = req.body;
 
-    const newReviewSql = 'INSERT INTO reviews (text, name, vote, book_id) VALUES (?, ?, ?, ?)'
+    const newReviewSql = 'INSERT INTO reviews (text, name, vote, movie_id) VALUES (?, ?, ?, ?)'
 
     connection.query(newReviewSql, [text, name, vote, id], (err, results) => {
         if (err) return res.status(500).json({ error: "Database query failed" })
         res.status(201)
-        res.json({ message: "Review added" })
+        return res.json({ message: "Review added", id: results.insertId })
     })
 
 }
