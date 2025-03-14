@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const upload = require("../middlewares/multer")
+const upload = require('../middlewares/multer');
 
 const { index, show, storeReviews, store, destroy, deleteReviews } = require('../controllers/moviesController');
 
@@ -11,7 +11,7 @@ router.get("/", index);
 
 router.get("/:id", show);
 
-router.post("/", upload.single("image"), store)
+router.post('/', upload.single('image'), store);
 
 router.post("/:id/reviews", storeReviews)
 
