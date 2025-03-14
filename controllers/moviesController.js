@@ -111,10 +111,10 @@ function destroy(req, res) {
     const id = parseInt(req.params.id); // Otteniamo l'ID del post dalla richiesta
 
     // Query per eliminare il post specifico
-    const deleteSql = `DELETE FROM posts WHERE id = ?`;
+    const deleteSql = `DELETE FROM movies WHERE id = ?`;
 
     // Eseguiamo la query per eliminare il post
-    connection.query(deletePostSql, [id], (err) => {
+    connection.query(deleteSql, [id], (err) => {
         if (err) {
             // Se c'è un errore nella query, restituiamo un errore 500
             return res.status(500).json({ error: "Failed to delete movie" });
