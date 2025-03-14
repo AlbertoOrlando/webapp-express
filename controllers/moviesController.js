@@ -51,6 +51,36 @@ function show(req, res) {
 
 function store(res, req) {
 
+    const { title, director, abstract } = req.body;
+
+    const imageName =
+
+        // se req.file = image esegui la condizione
+        req.files['image'] ?
+            // il nome del file è uguale a filename che si trova dentro l'oggetto req.file con nome image che ha come valore un array con dentro l'oggetto che avrà indice = 0
+            // da questo ricavami il file name
+            req.files['image'][0].filename
+            // se non lo trovi
+            :
+            // allora coverImageName è = a null
+            null;
+
+    const query = "INSERT INTO movies (title, director, image, abstract) VALUES (?, ?, ?, ?)"
+
+    connection.query(query, [title, director, imageName, abstract],
+        (err, result) => {
+            if (err) {
+                console.log(err)
+                return next(new Error("Errore interno del server"))
+
+            }
+
+            res.status(201).json({
+                status: "succes",
+                message: "Libro creato con successo"
+            })
+        }
+    )
 }
 
 function storeReviews(req, res) {
